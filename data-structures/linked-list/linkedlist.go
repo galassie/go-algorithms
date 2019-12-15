@@ -27,3 +27,12 @@ func (node *LinkedListNode) toString() string {
 	sb.WriteString("EOLL")
 	return sb.String()
 }
+
+func (node *LinkedListNode) addHead(newNode *LinkedListNode) LinkedListNode {
+	if newNode == nil {
+		return *node
+	}
+
+	newNode.next = node
+	return *newNode
+}
