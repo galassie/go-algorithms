@@ -1,25 +1,24 @@
-package main
+package datastructures
 
 import (
-	"fmt"
-	"strings"
 	"strconv"
+	"strings"
 )
 
 type LinkedListNode struct {
 	value int
-	next *LinkedListNode
+	next  *LinkedListNode
 }
 
 func (node *LinkedListNode) toString() string {
 	var sb strings.Builder
-	
+
 	currentNode := node
 	for {
 		if currentNode == nil {
 			break
 		}
-		
+
 		sb.WriteString(strconv.Itoa(currentNode.value))
 		sb.WriteString(" -> ")
 		currentNode = currentNode.next
