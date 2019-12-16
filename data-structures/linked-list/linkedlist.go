@@ -36,3 +36,17 @@ func (node *LinkedListNode) addHead(newNode *LinkedListNode) LinkedListNode {
 	newNode.next = node
 	return *newNode
 }
+
+func (node *LinkedListNode) addTail(newNode *LinkedListNode) LinkedListNode {
+	if newNode == nil {
+		return *node
+	}
+
+	if node.next == nil {
+		node.next = newNode
+	} else {
+		node.next.addTail(newNode)
+	}
+
+	return *node
+}
