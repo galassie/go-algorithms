@@ -10,6 +10,10 @@ type LinkedListNode struct {
 	next  *LinkedListNode
 }
 
+func newLinkedListNode(value int) *LinkedListNode {
+	return &LinkedListNode{value, nil}
+}
+
 func (node *LinkedListNode) toString() string {
 	var sb strings.Builder
 
@@ -28,18 +32,18 @@ func (node *LinkedListNode) toString() string {
 	return sb.String()
 }
 
-func (node *LinkedListNode) addHead(newNode *LinkedListNode) LinkedListNode {
+func (node *LinkedListNode) addHead(newNode *LinkedListNode) *LinkedListNode {
 	if newNode == nil {
-		return *node
+		return node
 	}
 
 	newNode.next = node
-	return *newNode
+	return newNode
 }
 
-func (node *LinkedListNode) addTail(newNode *LinkedListNode) LinkedListNode {
+func (node *LinkedListNode) addTail(newNode *LinkedListNode) *LinkedListNode {
 	if newNode == nil {
-		return *node
+		return node
 	}
 
 	if node.next == nil {
@@ -48,5 +52,5 @@ func (node *LinkedListNode) addTail(newNode *LinkedListNode) LinkedListNode {
 		node.next.addTail(newNode)
 	}
 
-	return *node
+	return node
 }

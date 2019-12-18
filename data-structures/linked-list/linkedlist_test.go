@@ -4,12 +4,12 @@ import "testing"
 
 func TestToString(t *testing.T) {
 	cases := []struct {
-		ll       LinkedListNode
+		ll       *LinkedListNode
 		expected string
 	}{
-		{LinkedListNode{7, nil}, "7 -> EOLL"},
-		{LinkedListNode{10, &LinkedListNode{25, &LinkedListNode{41, nil}}}, "10 -> 25 -> 41 -> EOLL"},
-		{LinkedListNode{3, &LinkedListNode{4, nil}}, "3 -> 4 -> EOLL"},
+		{&LinkedListNode{7, nil}, "7 -> EOLL"},
+		{&LinkedListNode{10, &LinkedListNode{25, &LinkedListNode{41, nil}}}, "10 -> 25 -> 41 -> EOLL"},
+		{&LinkedListNode{3, &LinkedListNode{4, nil}}, "3 -> 4 -> EOLL"},
 	}
 
 	for _, c := range cases {
@@ -35,18 +35,20 @@ func TestAddHeadWithNull(t *testing.T) {
 
 func TestAddHead(t *testing.T) {
 	cases := []struct {
-		ll       LinkedListNode
-		valueAdd int
-		expected string
+		ll         *LinkedListNode
+		valueToAdd []int
+		expected   string
 	}{
-		{LinkedListNode{7, nil}, 3, "3 -> 7 -> EOLL"},
-		{LinkedListNode{10, &LinkedListNode{25, &LinkedListNode{41, nil}}}, 90, "90 -> 10 -> 25 -> 41 -> EOLL"},
-		{LinkedListNode{3, &LinkedListNode{4, nil}}, 35, "35 -> 3 -> 4 -> EOLL"},
+		{newLinkedListNode(7), []int{3}, "3 -> 7 -> EOLL"},
+		{newLinkedListNode(10), []int{25, 41, 90}, "90 -> 41 -> 25 -> 10 -> EOLL"},
+		{newLinkedListNode(3), []int{4, 35}, "35 -> 4 -> 3 -> EOLL"},
 	}
 
 	for _, c := range cases {
-		nodeAdd := LinkedListNode{c.valueAdd, nil}
-		result := c.ll.addHead(&nodeAdd)
+		result := c.ll
+		for _, v := range c.valueToAdd {
+			result = result.addHead(newLinkedListNode(v))
+		}
 		actual := result.toString()
 
 		if actual != c.expected {
@@ -69,18 +71,20 @@ func TestAddTailWithNull(t *testing.T) {
 
 func TestAddTail(t *testing.T) {
 	cases := []struct {
-		ll       LinkedListNode
-		valueAdd int
-		expected string
+		ll         *LinkedListNode
+		valueToAdd []int
+		expected   string
 	}{
-		{LinkedListNode{7, nil}, 3, "7 -> 3 -> EOLL"},
-		{LinkedListNode{10, &LinkedListNode{25, &LinkedListNode{41, nil}}}, 90, "10 -> 25 -> 41 -> 90 -> EOLL"},
-		{LinkedListNode{3, &LinkedListNode{4, nil}}, 35, "3 -> 4 -> 35 -> EOLL"},
+		{newLinkedListNode(7), []int{3}, "7 -> 3 -> EOLL"},
+		{newLinkedListNode(10), []int{25, 41, 90}, "10 -> 25 -> 41 -> 90 -> EOLL"},
+		{newLinkedListNode(3), []int{4, 35}, "3 -> 4 -> 35 -> EOLL"},
 	}
 
 	for _, c := range cases {
-		nodeAdd := LinkedListNode{c.valueAdd, nil}
-		result := c.ll.addTail(&nodeAdd)
+		result := c.ll
+		for _, v := range c.valueToAdd {
+			result = result.addTail(newLinkedListNode(v))
+		}
 		actual := result.toString()
 
 		if actual != c.expected {
