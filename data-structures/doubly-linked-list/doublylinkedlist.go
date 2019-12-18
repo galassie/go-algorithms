@@ -11,6 +11,10 @@ type DoublyLinkedListNode struct {
 	next     *DoublyLinkedListNode
 }
 
+func newDoublyLinkedListNode(value int) *DoublyLinkedListNode {
+	return &DoublyLinkedListNode{value, nil, nil}
+}
+
 func (node *DoublyLinkedListNode) toString() string {
 	var sb strings.Builder
 
