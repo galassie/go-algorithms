@@ -2,27 +2,20 @@ package datastructures
 
 import "testing"
 
-func TestToString(t *testing.T) {
-	cases := []struct {
-		ll       *LinkedListNode
-		expected string
-	}{
-		{&LinkedListNode{7, nil}, "7 -> EOLL"},
-		{&LinkedListNode{10, &LinkedListNode{25, &LinkedListNode{41, nil}}}, "10 -> 25 -> 41 -> EOLL"},
-		{&LinkedListNode{3, &LinkedListNode{4, nil}}, "3 -> 4 -> EOLL"},
+func TestNewLinkedListNode(t *testing.T) {
+	actual := newLinkedListNode(3)
+
+	expectedValue := 3
+	if actual.value != expectedValue {
+		t.Errorf("NewLinkedList was incorrect, for value got: %d, want: %d.", actual.value, expectedValue)
 	}
-
-	for _, c := range cases {
-		actual := c.ll.toString()
-
-		if actual != c.expected {
-			t.Errorf("LinkedList toString was incorrect, got: %s, want: %s.", actual, c.expected)
-		}
+	if actual.next != nil {
+		t.Errorf("NewLinkedList was incorrect, for next got: %v, want nil.", actual.next)
 	}
 }
 
 func TestAddHeadWithNull(t *testing.T) {
-	ll := LinkedListNode{3, nil}
+	ll := newLinkedListNode(3)
 
 	result := ll.addHead(nil)
 
@@ -58,7 +51,7 @@ func TestAddHead(t *testing.T) {
 }
 
 func TestAddTailWithNull(t *testing.T) {
-	ll := LinkedListNode{3, nil}
+	ll := newLinkedListNode(3)
 
 	result := ll.addTail(nil)
 
@@ -89,6 +82,25 @@ func TestAddTail(t *testing.T) {
 
 		if actual != c.expected {
 			t.Errorf("LinkedList addTail was incorrect, got: %s, want: %s.", actual, c.expected)
+		}
+	}
+}
+
+func TestToString(t *testing.T) {
+	cases := []struct {
+		ll       *LinkedListNode
+		expected string
+	}{
+		{newLinkedListNode(7), "7 -> EOLL"},
+		{newLinkedListNode(10).addTail(newLinkedListNode(25)).addTail(newLinkedListNode(41)), "10 -> 25 -> 41 -> EOLL"},
+		{newLinkedListNode(3).addTail(newLinkedListNode(4)), "3 -> 4 -> EOLL"},
+	}
+
+	for _, c := range cases {
+		actual := c.ll.toString()
+
+		if actual != c.expected {
+			t.Errorf("LinkedList toString was incorrect, got: %s, want: %s.", actual, c.expected)
 		}
 	}
 }

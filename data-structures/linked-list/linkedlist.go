@@ -14,24 +14,6 @@ func newLinkedListNode(value int) *LinkedListNode {
 	return &LinkedListNode{value, nil}
 }
 
-func (node *LinkedListNode) toString() string {
-	var sb strings.Builder
-
-	currentNode := node
-	for {
-		if currentNode == nil {
-			break
-		}
-
-		sb.WriteString(strconv.Itoa(currentNode.value))
-		sb.WriteString(" -> ")
-		currentNode = currentNode.next
-	}
-
-	sb.WriteString("EOLL")
-	return sb.String()
-}
-
 func (node *LinkedListNode) addHead(newNode *LinkedListNode) *LinkedListNode {
 	if newNode == nil {
 		return node
@@ -53,4 +35,22 @@ func (node *LinkedListNode) addTail(newNode *LinkedListNode) *LinkedListNode {
 	}
 
 	return node
+}
+
+func (node *LinkedListNode) toString() string {
+	var sb strings.Builder
+
+	currentNode := node
+	for {
+		if currentNode == nil {
+			break
+		}
+
+		sb.WriteString(strconv.Itoa(currentNode.value))
+		sb.WriteString(" -> ")
+		currentNode = currentNode.next
+	}
+
+	sb.WriteString("EOLL")
+	return sb.String()
 }
