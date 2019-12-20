@@ -23,6 +23,16 @@ func (node *LinkedListNode) addHead(newNode *LinkedListNode) *LinkedListNode {
 	return newNode
 }
 
+func (node *LinkedListNode) removeHead() *LinkedListNode {
+	if node.next == nil {
+		return nil
+	}
+
+	result := node.next
+	node.next = nil
+	return result
+}
+
 func (node *LinkedListNode) addTail(newNode *LinkedListNode) *LinkedListNode {
 	if newNode == nil {
 		return node

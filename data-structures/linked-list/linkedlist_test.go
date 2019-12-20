@@ -50,6 +50,35 @@ func TestAddHead(t *testing.T) {
 	}
 }
 
+func TestRemoveHeadWithNextNull(t *testing.T) {
+	ll := newLinkedListNode(3)
+
+	actual := ll.removeHead()
+
+	if actual != nil {
+		t.Errorf("LinkedList removeHead with next nil was incorrect, got: %v, want: nil", actual)
+	}
+}
+
+func TestRemoveHead(t *testing.T) {
+	cases := []struct {
+		ll         *LinkedListNode
+		expected   string
+	}{
+		{newLinkedListNode(10).addTail(newLinkedListNode(25)), "25 -> EOLL"},
+		{newLinkedListNode(3).addTail(newLinkedListNode(4)).addTail(newLinkedListNode(33)), "4 -> 33 -> EOLL"},
+	}
+
+	for _, c := range cases {
+		result := c.ll.removeHead()
+		actual := result.toString()
+
+		if actual != c.expected {
+			t.Errorf("LinkedList removeTail was incorrect, got: %s, want: %s.", actual, c.expected)
+		}
+	}
+}
+
 func TestAddTailWithNull(t *testing.T) {
 	ll := newLinkedListNode(3)
 
