@@ -47,6 +47,20 @@ func (node *LinkedListNode) addTail(newNode *LinkedListNode) *LinkedListNode {
 	return node
 }
 
+func (node *LinkedListNode) removeTail() *LinkedListNode {
+	if node.next == nil {
+		return nil
+	}
+	if node.next.next == nil {
+		node.next = nil
+		return node
+	}
+
+	node.next.removeTail()
+	return node
+}
+
+
 func (node *LinkedListNode) toString() string {
 	var sb strings.Builder
 

@@ -67,6 +67,7 @@ func TestRemoveHead(t *testing.T) {
 	}{
 		{newLinkedListNode(10).addTail(newLinkedListNode(25)), "25 -> EOLL"},
 		{newLinkedListNode(3).addTail(newLinkedListNode(4)).addTail(newLinkedListNode(33)), "4 -> 33 -> EOLL"},
+		{newLinkedListNode(3).addTail(newLinkedListNode(4)).addTail(newLinkedListNode(33)).addTail(newLinkedListNode(92)), "4 -> 33 -> 92 -> EOLL"},
 	}
 
 	for _, c := range cases {
@@ -74,7 +75,7 @@ func TestRemoveHead(t *testing.T) {
 		actual := result.toString()
 
 		if actual != c.expected {
-			t.Errorf("LinkedList removeTail was incorrect, got: %s, want: %s.", actual, c.expected)
+			t.Errorf("LinkedList removeHead was incorrect, got: %s, want: %s.", actual, c.expected)
 		}
 	}
 }
@@ -111,6 +112,36 @@ func TestAddTail(t *testing.T) {
 
 		if actual != c.expected {
 			t.Errorf("LinkedList addTail was incorrect, got: %s, want: %s.", actual, c.expected)
+		}
+	}
+}
+
+func TestRemoveTailWithNextNull(t *testing.T) {
+	ll := newLinkedListNode(3)
+
+	actual := ll.removeTail()
+
+	if actual != nil {
+		t.Errorf("LinkedList removeTail with next nil was incorrect, got: %v, want: nil", actual)
+	}
+}
+
+func TestRemoveTail(t *testing.T) {
+	cases := []struct {
+		ll         *LinkedListNode
+		expected   string
+	}{
+		{newLinkedListNode(10).addTail(newLinkedListNode(25)), "10 -> EOLL"},
+		{newLinkedListNode(3).addTail(newLinkedListNode(4)).addTail(newLinkedListNode(33)), "3 -> 4 -> EOLL"},
+		{newLinkedListNode(3).addTail(newLinkedListNode(4)).addTail(newLinkedListNode(33)).addTail(newLinkedListNode(92)), "3 -> 4 -> 33 -> EOLL"},
+	}
+
+	for _, c := range cases {
+		result := c.ll.removeTail()
+		actual := result.toString()
+
+		if actual != c.expected {
+			t.Errorf("LinkedList removeTail was incorrect, got: %s, want: %s.", actual, c.expected)
 		}
 	}
 }
