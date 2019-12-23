@@ -25,6 +25,20 @@ func (node *DoublyLinkedListNode) addHead(newNode *DoublyLinkedListNode) *Doubly
 	return newNode
 }
 
+func (node *DoublyLinkedListNode) removeHead() *DoublyLinkedListNode {
+	if node.previous != nil {
+		return node.previous.removeHead()
+	}
+	if node.next == nil {
+		return nil
+	}
+
+	result := node.next
+	node.next = nil
+	result.previous = nil
+	return result
+}
+
 func (node *DoublyLinkedListNode) addTail(newNode *DoublyLinkedListNode) *DoublyLinkedListNode {
 	if newNode == nil {
 		return node
