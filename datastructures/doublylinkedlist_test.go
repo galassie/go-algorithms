@@ -2,7 +2,7 @@ package datastructures
 
 import "testing"
 
-func TestNewDoublyLinkedListNode(t *testing.T) {
+func Test_DoublyLinkedList_New(t *testing.T) {
 	actual := newDoublyLinkedListNode(14)
 
 	expectedValue := 14
@@ -16,7 +16,7 @@ func TestNewDoublyLinkedListNode(t *testing.T) {
 		t.Errorf("NewDoublyLinkedListNode was incorrect, for next got: %v, want nil.", actual.next)
 	}
 }
-func TestAddHeadWithNull(t *testing.T) {
+func Test_DoublyLinkedList_AddHeadWithNil(t *testing.T) {
 	dll := newDoublyLinkedListNode(3)
 
 	result := dll.addHead(nil)
@@ -28,7 +28,7 @@ func TestAddHeadWithNull(t *testing.T) {
 	}
 }
 
-func TestAddHead(t *testing.T) {
+func Test_DoublyLinkedList_AddHead(t *testing.T) {
 	cases := []struct {
 		dll        	*DoublyLinkedListNode
 		valueToAdd 	[]int
@@ -52,7 +52,7 @@ func TestAddHead(t *testing.T) {
 	}
 }
 
-func TestRemoveHeadWithNextNull(t *testing.T) {
+func Test_DoublyLinkedList_RemoveHeadWithNextNil(t *testing.T) {
 	dll := newDoublyLinkedListNode(3)
 
 	actual := dll.removeHead()
@@ -62,7 +62,7 @@ func TestRemoveHeadWithNextNull(t *testing.T) {
 	}
 }
 
-func TestRemoveHead(t *testing.T) {
+func Test_DoublyLinkedList_RemoveHead(t *testing.T) {
 	cases := []struct {
 		dll         *DoublyLinkedListNode
 		expected   	string
@@ -82,7 +82,7 @@ func TestRemoveHead(t *testing.T) {
 	}
 }
 
-func TestRemoveHeadFromInnerNode(t *testing.T) {
+func Test_DoublyLinkedList_RemoveHeadFromInnerNode(t *testing.T) {
 	node1 := newDoublyLinkedListNode(3)
 	node2 := newDoublyLinkedListNode(4)
 	node3 := newDoublyLinkedListNode(33)
@@ -99,7 +99,7 @@ func TestRemoveHeadFromInnerNode(t *testing.T) {
 	}
 }
 
-func TestAddTailWithNull(t *testing.T) {
+func Test_DoublyLinkedList_AddTailWithNil(t *testing.T) {
 	dll := newDoublyLinkedListNode(3)
 
 	result := dll.addTail(nil)
@@ -111,7 +111,7 @@ func TestAddTailWithNull(t *testing.T) {
 	}
 }
 
-func TestAddTail(t *testing.T) {
+func Test_DoublyLinkedList_AddTail(t *testing.T) {
 	cases := []struct {
 		dll         *DoublyLinkedListNode
 		valueToAdd 	[]int
@@ -135,7 +135,7 @@ func TestAddTail(t *testing.T) {
 	}
 }
 
-func TestToString(t *testing.T) {
+func Test_DoublyLinkedList_ToString(t *testing.T) {
 	cases := []struct {
 		dll      	*DoublyLinkedListNode
 		expected 	string

@@ -2,7 +2,7 @@ package datastructures
 
 import "testing"
 
-func TestNewLinkedListNode(t *testing.T) {
+func Test_LinkedList_New(t *testing.T) {
 	actual := newLinkedListNode(3)
 
 	expectedValue := 3
@@ -14,7 +14,7 @@ func TestNewLinkedListNode(t *testing.T) {
 	}
 }
 
-func TestAddHeadWithNull(t *testing.T) {
+func Test_LinkedList_AddHeadWithNil(t *testing.T) {
 	ll := newLinkedListNode(3)
 
 	result := ll.addHead(nil)
@@ -26,7 +26,7 @@ func TestAddHeadWithNull(t *testing.T) {
 	}
 }
 
-func TestAddHead(t *testing.T) {
+func Test_LinkedList_AddHead(t *testing.T) {
 	cases := []struct {
 		ll         *LinkedListNode
 		valueToAdd []int
@@ -50,7 +50,7 @@ func TestAddHead(t *testing.T) {
 	}
 }
 
-func TestRemoveHeadWithNextNull(t *testing.T) {
+func Test_LinkedList_RemoveHeadWithNextNil(t *testing.T) {
 	ll := newLinkedListNode(3)
 
 	actual := ll.removeHead()
@@ -60,10 +60,10 @@ func TestRemoveHeadWithNextNull(t *testing.T) {
 	}
 }
 
-func TestRemoveHead(t *testing.T) {
+func Test_LinkedList_RemoveHead(t *testing.T) {
 	cases := []struct {
-		ll         *LinkedListNode
-		expected   string
+		ll       *LinkedListNode
+		expected string
 	}{
 		{newLinkedListNode(10).addTail(newLinkedListNode(25)), "25 -> EOLL"},
 		{newLinkedListNode(3).addTail(newLinkedListNode(4)).addTail(newLinkedListNode(33)), "4 -> 33 -> EOLL"},
@@ -80,7 +80,7 @@ func TestRemoveHead(t *testing.T) {
 	}
 }
 
-func TestAddTailWithNull(t *testing.T) {
+func Test_LinkedList_AddTailWithNil(t *testing.T) {
 	ll := newLinkedListNode(3)
 
 	result := ll.addTail(nil)
@@ -92,7 +92,7 @@ func TestAddTailWithNull(t *testing.T) {
 	}
 }
 
-func TestAddTail(t *testing.T) {
+func Test_LinkedList_AddTail(t *testing.T) {
 	cases := []struct {
 		ll         *LinkedListNode
 		valueToAdd []int
@@ -116,7 +116,7 @@ func TestAddTail(t *testing.T) {
 	}
 }
 
-func TestRemoveTailWithNextNull(t *testing.T) {
+func Test_LinkedList_RemoveTailWithNextNil(t *testing.T) {
 	ll := newLinkedListNode(3)
 
 	actual := ll.removeTail()
@@ -126,10 +126,10 @@ func TestRemoveTailWithNextNull(t *testing.T) {
 	}
 }
 
-func TestRemoveTail(t *testing.T) {
+func Test_LinkedList_RemoveTail(t *testing.T) {
 	cases := []struct {
-		ll         *LinkedListNode
-		expected   string
+		ll       *LinkedListNode
+		expected string
 	}{
 		{newLinkedListNode(10).addTail(newLinkedListNode(25)), "10 -> EOLL"},
 		{newLinkedListNode(3).addTail(newLinkedListNode(4)).addTail(newLinkedListNode(33)), "3 -> 4 -> EOLL"},
@@ -146,7 +146,7 @@ func TestRemoveTail(t *testing.T) {
 	}
 }
 
-func TestToString(t *testing.T) {
+func Test_LinkedList_ToString(t *testing.T) {
 	cases := []struct {
 		ll       *LinkedListNode
 		expected string

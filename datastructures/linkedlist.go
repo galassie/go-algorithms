@@ -60,7 +60,6 @@ func (node *LinkedListNode) removeTail() *LinkedListNode {
 	return node
 }
 
-
 func (node *LinkedListNode) toString() string {
 	var sb strings.Builder
 
