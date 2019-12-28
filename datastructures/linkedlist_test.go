@@ -6,6 +6,9 @@ func Test_LinkedList_New(t *testing.T) {
 	actual := newLinkedListNode(3)
 
 	expectedValue := 3
+	if actual == nil {
+		t.Errorf("NewLinkedList was incorrect, got nil.")
+	}
 	if actual.value != expectedValue {
 		t.Errorf("NewLinkedList was incorrect, for value got: %d, want: %d.", actual.value, expectedValue)
 	}

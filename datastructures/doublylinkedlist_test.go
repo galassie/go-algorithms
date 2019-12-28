@@ -6,6 +6,9 @@ func Test_DoublyLinkedList_New(t *testing.T) {
 	actual := newDoublyLinkedListNode(14)
 
 	expectedValue := 14
+	if actual == nil {
+		t.Errorf("NewDoublyLinkedListNode was incorrect, got nil.")
+	}
 	if actual.value != expectedValue {
 		t.Errorf("NewDoublyLinkedListNode was incorrect, for value got: %d, want: %d.", actual.value, expectedValue)
 	}
@@ -30,9 +33,9 @@ func Test_DoublyLinkedList_AddHeadWithNil(t *testing.T) {
 
 func Test_DoublyLinkedList_AddHead(t *testing.T) {
 	cases := []struct {
-		dll        	*DoublyLinkedListNode
-		valueToAdd 	[]int
-		expected   	string
+		dll        *DoublyLinkedListNode
+		valueToAdd []int
+		expected   string
 	}{
 		{newDoublyLinkedListNode(7), []int{3}, "nil<~3 -- 3<~7 -- EODLL"},
 		{newDoublyLinkedListNode(10), []int{25, 41, 90}, "nil<~90 -- 90<~41 -- 41<~25 -- 25<~10 -- EODLL"},
@@ -64,8 +67,8 @@ func Test_DoublyLinkedList_RemoveHeadWithNextNil(t *testing.T) {
 
 func Test_DoublyLinkedList_RemoveHead(t *testing.T) {
 	cases := []struct {
-		dll         *DoublyLinkedListNode
-		expected   	string
+		dll      *DoublyLinkedListNode
+		expected string
 	}{
 		{newDoublyLinkedListNode(10).addTail(newDoublyLinkedListNode(25)), "nil<~25 -- EODLL"},
 		{newDoublyLinkedListNode(3).addTail(newDoublyLinkedListNode(4)).addTail(newDoublyLinkedListNode(33)), "nil<~4 -- 4<~33 -- EODLL"},
@@ -87,7 +90,7 @@ func Test_DoublyLinkedList_RemoveHeadFromInnerNode(t *testing.T) {
 	node2 := newDoublyLinkedListNode(4)
 	node3 := newDoublyLinkedListNode(33)
 	node4 := newDoublyLinkedListNode(92)
-	
+
 	node1.addTail(node2).addTail(node3).addTail(node4)
 
 	result := node3.removeHead()
@@ -113,9 +116,9 @@ func Test_DoublyLinkedList_AddTailWithNil(t *testing.T) {
 
 func Test_DoublyLinkedList_AddTail(t *testing.T) {
 	cases := []struct {
-		dll         *DoublyLinkedListNode
-		valueToAdd 	[]int
-		expected   	string
+		dll        *DoublyLinkedListNode
+		valueToAdd []int
+		expected   string
 	}{
 		{newDoublyLinkedListNode(7), []int{3}, "nil<~7 -- 7<~3 -- EODLL"},
 		{newDoublyLinkedListNode(10), []int{25, 41, 90}, "nil<~10 -- 10<~25 -- 25<~41 -- 41<~90 -- EODLL"},
@@ -137,8 +140,8 @@ func Test_DoublyLinkedList_AddTail(t *testing.T) {
 
 func Test_DoublyLinkedList_ToString(t *testing.T) {
 	cases := []struct {
-		dll      	*DoublyLinkedListNode
-		expected 	string
+		dll      *DoublyLinkedListNode
+		expected string
 	}{
 		{newDoublyLinkedListNode(3), "nil<~3 -- EODLL"},
 		{newDoublyLinkedListNode(17).addTail(newDoublyLinkedListNode(31)).addTail(newDoublyLinkedListNode(35)), "nil<~17 -- 17<~31 -- 31<~35 -- EODLL"},
