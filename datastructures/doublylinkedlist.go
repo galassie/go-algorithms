@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+// DoublyLinkedListNode represents an integer-value node in a DoublyLinkedList
 type DoublyLinkedListNode struct {
 	value    int
 	previous *DoublyLinkedListNode

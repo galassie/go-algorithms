@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+// LinkedListNode represents an integer-value node in a LinkedList
 type LinkedListNode struct {
 	value int
 	next  *LinkedListNode
