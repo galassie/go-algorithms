@@ -31,9 +31,9 @@ func Test_LinkedList_AddHeadWithNil(t *testing.T) {
 
 func Test_LinkedList_AddHead(t *testing.T) {
 	cases := []struct {
-		ll         *LinkedListNode
-		valueToAdd []int
-		expected   string
+		ll          *LinkedListNode
+		valuesToAdd []int
+		expected    string
 	}{
 		{newLinkedListNode(7), []int{3}, "3 -> 7 -> EOLL"},
 		{newLinkedListNode(10), []int{25, 41, 90}, "90 -> 41 -> 25 -> 10 -> EOLL"},
@@ -42,7 +42,7 @@ func Test_LinkedList_AddHead(t *testing.T) {
 
 	for _, c := range cases {
 		result := c.ll
-		for _, v := range c.valueToAdd {
+		for _, v := range c.valuesToAdd {
 			result = result.addHead(newLinkedListNode(v))
 		}
 		actual := result.toString()
