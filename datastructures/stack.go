@@ -20,6 +20,12 @@ func (stack *Stack) push(value int) *Stack {
 	return stack
 }
 
+func (stack *Stack) pop() int {
+	result := stack.head.value
+	stack.head = stack.head.removeHead()
+	return result
+}
+
 func (stack *Stack) toString() string {
 	var sb strings.Builder
 

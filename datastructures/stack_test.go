@@ -12,7 +12,7 @@ func Test_Stack_New(t *testing.T) {
 
 func Test_Stack_Push(t *testing.T) {
 	cases := []struct {
-		ll           *Stack
+		s            *Stack
 		valuesToPush []int
 		expected     string
 	}{
@@ -22,7 +22,7 @@ func Test_Stack_Push(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		result := c.ll
+		result := c.s
 		for _, v := range c.valuesToPush {
 			result = result.push(v)
 		}
@@ -30,6 +30,35 @@ func Test_Stack_Push(t *testing.T) {
 
 		if actual != c.expected {
 			t.Errorf("Stack push was incorrect, got: %s, want: %s.", actual, c.expected)
+		}
+	}
+}
+
+func Test_Stack_Pop(t *testing.T) {
+	cases := []struct {
+		s                    *Stack
+		timesToPop           int
+		expectedLastValuePop int
+		expected             string
+	}{
+		{newStack().push(7).push(10), 1, 10, "7 | EOS"},
+		{newStack().push(10).push(25).push(41), 2, 25, "10 | EOS"},
+		{newStack().push(4), 1, 4, "EOS"},
+	}
+
+	for _, c := range cases {
+		result := c.s
+		actualLastValuePop := 0
+		for i := 0; i < c.timesToPop; i++ {
+			actualLastValuePop = result.pop()
+		}
+		actual := result.toString()
+
+		if actual != c.expected {
+			t.Errorf("Stack pop was incorrect, got: %s, want: %s.", actual, c.expected)
+		}
+		if actualLastValuePop != c.expectedLastValuePop {
+			t.Errorf("Stack pop last value was incorrect, got: %d, want: %d.", actualLastValuePop, c.expectedLastValuePop)
 		}
 	}
 }
