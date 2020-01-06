@@ -63,6 +63,25 @@ func Test_Stack_Pop(t *testing.T) {
 	}
 }
 
+func Test_Stack_Peek(t *testing.T) {
+	cases := []struct {
+		s        *Stack
+		expected int
+	}{
+		{newStack().push(7).push(10), 10},
+		{newStack().push(10).push(25).push(41), 41},
+		{newStack().push(4), 4},
+	}
+
+	for _, c := range cases {
+		actual := c.s.peek()
+
+		if actual != c.expected {
+			t.Errorf("Stack peek was incorrect, got: %d, want: %d.", actual, c.expected)
+		}
+	}
+}
+
 func Test_Stack_ToString(t *testing.T) {
 	cases := []struct {
 		s        *Stack

@@ -26,6 +26,10 @@ func (stack *Stack) pop() int {
 	return result
 }
 
+func (stack *Stack) peek() int {
+	return stack.head.value
+}
+
 func (stack *Stack) toString() string {
 	var sb strings.Builder
 
