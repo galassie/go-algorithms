@@ -2,18 +2,26 @@ package datastructures
 
 import "testing"
 
-func Test_LinkedList_New(t *testing.T) {
+func Test_LinkedListNode_New(t *testing.T) {
 	actual := newLinkedListNode(3)
 
 	expectedValue := 3
 	if actual == nil {
-		t.Errorf("NewLinkedList was incorrect, got nil.")
+		t.Errorf("NewLinkedListNode was incorrect, got nil.")
 	}
 	if actual.value != expectedValue {
-		t.Errorf("NewLinkedList was incorrect, for value got: %d, want: %d.", actual.value, expectedValue)
+		t.Errorf("NewLinkedListNode was incorrect, for value got: %d, want: %d.", actual.value, expectedValue)
 	}
 	if actual.next != nil {
-		t.Errorf("NewLinkedList was incorrect, for next got: %v, want nil.", actual.next)
+		t.Errorf("NewLinkedListNode was incorrect, for next got: %v, want nil.", actual.next)
+	}
+}
+
+func Test_LinkedList_New(t *testing.T) {
+	actual := newLinkedList()
+
+	if actual == nil {
+		t.Errorf("NewLinkedList was incorrect, got nil.")
 	}
 }
 

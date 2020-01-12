@@ -11,8 +11,17 @@ type LinkedListNode struct {
 	next  *LinkedListNode
 }
 
+// LinkedList represents an integer-value LinkedList
+type LinkedList struct {
+	first *LinkedList
+}
+
 func newLinkedListNode(value int) *LinkedListNode {
 	return &LinkedListNode{value, nil}
+}
+
+func newLinkedList() *LinkedList {
+	return &LinkedList{nil}
 }
 
 func (node *LinkedListNode) addHead(newNode *LinkedListNode) *LinkedListNode {
