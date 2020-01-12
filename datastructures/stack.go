@@ -7,33 +7,32 @@ import (
 
 // Stack represents a stack data stcture using LinkedList
 type Stack struct {
-	head *LinkedListNode
+	ll *LinkedList
 }
 
 func newStack() *Stack {
-	return &Stack{nil}
+	return &Stack{newLinkedList()}
 }
 
 func (stack *Stack) push(value int) *Stack {
-	newNode := newLinkedListNode(value)
-	stack.head = stack.head.addHead(newNode)
+	stack.ll = stack.ll.addHead(value)
 	return stack
 }
 
 func (stack *Stack) pop() int {
-	result := stack.head.value
-	stack.head = stack.head.removeHead()
+	result := stack.ll.first.value
+	stack.ll = stack.ll.removeHead()
 	return result
 }
 
 func (stack *Stack) peek() int {
-	return stack.head.value
+	return stack.ll.first.value
 }
 
 func (stack *Stack) toString() string {
 	var sb strings.Builder
 
-	currentElement := stack.head
+	currentElement := stack.ll.first
 	for {
 		if currentElement == nil {
 			break

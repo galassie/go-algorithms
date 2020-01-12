@@ -7,29 +7,28 @@ import (
 
 // Queue represents a queue data stcture using LinkedList
 type Queue struct {
-	first *LinkedListNode
+	ll *LinkedList
 }
 
 func newQueue() *Queue {
-	return &Queue{nil}
+	return &Queue{newLinkedList()}
 }
 
 func (queue *Queue) enqueue(value int) *Queue {
-	newNode := newLinkedListNode(value)
-	queue.first.addTail(newNode)
+	queue.ll.addTail(value)
 	return queue
 }
 
 func (queue *Queue) dequeue() int {
-	result := queue.first.value
-	queue.first = queue.first.removeHead()
+	result := queue.ll.first.value
+	queue.ll = queue.ll.removeHead()
 	return result
 }
 
 func (queue *Queue) toString() string {
 	var sb strings.Builder
 
-	currentElement := queue.first
+	currentElement := queue.ll.first
 	for {
 		if currentElement == nil {
 			break

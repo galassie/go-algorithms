@@ -25,33 +25,21 @@ func Test_LinkedList_New(t *testing.T) {
 	}
 }
 
-func Test_LinkedList_AddHeadWithNil(t *testing.T) {
-	ll := newLinkedListNode(3)
-
-	result := ll.addHead(nil)
-
-	expected := "3 -> EOLL"
-	actual := result.toString()
-	if actual != expected {
-		t.Errorf("LinkedList addHead with nil was incorrect, got: %s, want: %s.", actual, expected)
-	}
-}
-
 func Test_LinkedList_AddHead(t *testing.T) {
 	cases := []struct {
-		ll          *LinkedListNode
+		ll          *LinkedList
 		valuesToAdd []int
 		expected    string
 	}{
-		{newLinkedListNode(7), []int{3}, "3 -> 7 -> EOLL"},
-		{newLinkedListNode(10), []int{25, 41, 90}, "90 -> 41 -> 25 -> 10 -> EOLL"},
-		{newLinkedListNode(3), []int{4, 35}, "35 -> 4 -> 3 -> EOLL"},
+		{newLinkedList(), []int{7, 3}, "3 -> 7 -> EOLL"},
+		{newLinkedList(), []int{10, 25, 41, 90}, "90 -> 41 -> 25 -> 10 -> EOLL"},
+		{newLinkedList(), []int{3, 4, 35}, "35 -> 4 -> 3 -> EOLL"},
 	}
 
 	for _, c := range cases {
 		result := c.ll
 		for _, v := range c.valuesToAdd {
-			result = result.addHead(newLinkedListNode(v))
+			result.addHead(v)
 		}
 		actual := result.toString()
 
@@ -61,24 +49,14 @@ func Test_LinkedList_AddHead(t *testing.T) {
 	}
 }
 
-func Test_LinkedList_RemoveHeadWithNextNil(t *testing.T) {
-	ll := newLinkedListNode(3)
-
-	actual := ll.removeHead()
-
-	if actual != nil {
-		t.Errorf("LinkedList removeHead with next nil was incorrect, got: %v, want: nil", actual)
-	}
-}
-
 func Test_LinkedList_RemoveHead(t *testing.T) {
 	cases := []struct {
-		ll       *LinkedListNode
+		ll       *LinkedList
 		expected string
 	}{
-		{newLinkedListNode(10).addTail(newLinkedListNode(25)), "25 -> EOLL"},
-		{newLinkedListNode(3).addTail(newLinkedListNode(4)).addTail(newLinkedListNode(33)), "4 -> 33 -> EOLL"},
-		{newLinkedListNode(3).addTail(newLinkedListNode(4)).addTail(newLinkedListNode(33)).addTail(newLinkedListNode(92)), "4 -> 33 -> 92 -> EOLL"},
+		{newLinkedList().addTail(10).addTail(25), "25 -> EOLL"},
+		{newLinkedList().addTail(3).addTail(4).addTail(33), "4 -> 33 -> EOLL"},
+		{newLinkedList().addTail(3).addTail(4).addTail(33).addTail(92), "4 -> 33 -> 92 -> EOLL"},
 	}
 
 	for _, c := range cases {
@@ -91,33 +69,21 @@ func Test_LinkedList_RemoveHead(t *testing.T) {
 	}
 }
 
-func Test_LinkedList_AddTailWithNil(t *testing.T) {
-	ll := newLinkedListNode(3)
-
-	result := ll.addTail(nil)
-
-	expected := "3 -> EOLL"
-	actual := result.toString()
-	if actual != expected {
-		t.Errorf("LinkedList addTail with nil was incorrect, got: %s, want: %s.", actual, expected)
-	}
-}
-
 func Test_LinkedList_AddTail(t *testing.T) {
 	cases := []struct {
-		ll         *LinkedListNode
+		ll         *LinkedList
 		valueToAdd []int
 		expected   string
 	}{
-		{newLinkedListNode(7), []int{3}, "7 -> 3 -> EOLL"},
-		{newLinkedListNode(10), []int{25, 41, 90}, "10 -> 25 -> 41 -> 90 -> EOLL"},
-		{newLinkedListNode(3), []int{4, 35}, "3 -> 4 -> 35 -> EOLL"},
+		{newLinkedList(), []int{7, 3}, "7 -> 3 -> EOLL"},
+		{newLinkedList(), []int{10, 25, 41, 90}, "10 -> 25 -> 41 -> 90 -> EOLL"},
+		{newLinkedList(), []int{3, 4, 35}, "3 -> 4 -> 35 -> EOLL"},
 	}
 
 	for _, c := range cases {
 		result := c.ll
 		for _, v := range c.valueToAdd {
-			result = result.addTail(newLinkedListNode(v))
+			result = result.addTail(v)
 		}
 		actual := result.toString()
 
@@ -127,24 +93,15 @@ func Test_LinkedList_AddTail(t *testing.T) {
 	}
 }
 
-func Test_LinkedList_RemoveTailWithNextNil(t *testing.T) {
-	ll := newLinkedListNode(3)
-
-	actual := ll.removeTail()
-
-	if actual != nil {
-		t.Errorf("LinkedList removeTail with next nil was incorrect, got: %v, want: nil", actual)
-	}
-}
-
 func Test_LinkedList_RemoveTail(t *testing.T) {
 	cases := []struct {
-		ll       *LinkedListNode
+		ll       *LinkedList
 		expected string
 	}{
-		{newLinkedListNode(10).addTail(newLinkedListNode(25)), "10 -> EOLL"},
-		{newLinkedListNode(3).addTail(newLinkedListNode(4)).addTail(newLinkedListNode(33)), "3 -> 4 -> EOLL"},
-		{newLinkedListNode(3).addTail(newLinkedListNode(4)).addTail(newLinkedListNode(33)).addTail(newLinkedListNode(92)), "3 -> 4 -> 33 -> EOLL"},
+		{newLinkedList().addTail(2), "EOLL"},
+		{newLinkedList().addTail(10).addTail(25), "10 -> EOLL"},
+		{newLinkedList().addTail(3).addTail(4).addTail(33), "3 -> 4 -> EOLL"},
+		{newLinkedList().addTail(3).addTail(4).addTail(33).addTail(92), "3 -> 4 -> 33 -> EOLL"},
 	}
 
 	for _, c := range cases {
@@ -159,12 +116,12 @@ func Test_LinkedList_RemoveTail(t *testing.T) {
 
 func Test_LinkedList_ToString(t *testing.T) {
 	cases := []struct {
-		ll       *LinkedListNode
+		ll       *LinkedList
 		expected string
 	}{
-		{newLinkedListNode(7), "7 -> EOLL"},
-		{newLinkedListNode(10).addTail(newLinkedListNode(25)).addTail(newLinkedListNode(41)), "10 -> 25 -> 41 -> EOLL"},
-		{newLinkedListNode(3).addTail(newLinkedListNode(4)), "3 -> 4 -> EOLL"},
+		{newLinkedList().addHead(7), "7 -> EOLL"},
+		{newLinkedList().addHead(10).addTail(25).addTail(41), "10 -> 25 -> 41 -> EOLL"},
+		{newLinkedList().addHead(3).addTail(4), "3 -> 4 -> EOLL"},
 	}
 
 	for _, c := range cases {

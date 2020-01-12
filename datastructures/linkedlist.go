@@ -13,7 +13,7 @@ type LinkedListNode struct {
 
 // LinkedList represents an integer-value LinkedList
 type LinkedList struct {
-	first *LinkedList
+	first *LinkedListNode
 }
 
 func newLinkedListNode(value int) *LinkedListNode {
@@ -24,56 +24,64 @@ func newLinkedList() *LinkedList {
 	return &LinkedList{nil}
 }
 
-func (node *LinkedListNode) addHead(newNode *LinkedListNode) *LinkedListNode {
-	if newNode == nil {
-		return node
+func (linkedList *LinkedList) addHead(value int) *LinkedList {
+	node := newLinkedListNode(value)
+
+	if linkedList.first != nil {
+		node.next = linkedList.first
 	}
 
-	newNode.next = node
-	return newNode
+	linkedList.first = node
+	return linkedList
 }
 
-func (node *LinkedListNode) removeHead() *LinkedListNode {
-	if node.next == nil {
-		return nil
+func (linkedList *LinkedList) removeHead() *LinkedList {
+	if linkedList.first != nil {
+		toRemove := linkedList.first
+		linkedList.first = toRemove.next
+		toRemove.next = nil
 	}
 
-	result := node.next
-	node.next = nil
-	return result
+	return linkedList
 }
 
-func (node *LinkedListNode) addTail(newNode *LinkedListNode) *LinkedListNode {
-	if newNode == nil {
-		return node
-	}
+func (linkedList *LinkedList) addTail(value int) *LinkedList {
+	node := newLinkedListNode(value)
 
-	if node.next == nil {
-		node.next = newNode
+	if linkedList.first == nil {
+		linkedList.first = node
 	} else {
-		node.next.addTail(newNode)
+		nodeToEval := linkedList.first
+		for nodeToEval.next != nil {
+			nodeToEval = nodeToEval.next
+		}
+		nodeToEval.next = node
 	}
 
-	return node
+	return linkedList
 }
 
-func (node *LinkedListNode) removeTail() *LinkedListNode {
-	if node.next == nil {
-		return nil
-	}
-	if node.next.next == nil {
-		node.next = nil
-		return node
+func (linkedList *LinkedList) removeTail() *LinkedList {
+	if linkedList.first != nil && linkedList.first.next == nil {
+		linkedList.first = nil
+		return linkedList
+	} else if linkedList.first != nil && linkedList.first.next != nil {
+		possibleNewLast := linkedList.first
+		possibleToRemove := possibleNewLast.next
+		for possibleToRemove.next != nil {
+			possibleNewLast = possibleToRemove
+			possibleToRemove = possibleNewLast.next
+		}
+		possibleNewLast.next = nil
 	}
 
-	node.next.removeTail()
-	return node
+	return linkedList
 }
 
-func (node *LinkedListNode) toString() string {
+func (linkedList *LinkedList) toString() string {
 	var sb strings.Builder
 
-	currentNode := node
+	currentNode := linkedList.first
 	for {
 		if currentNode == nil {
 			break

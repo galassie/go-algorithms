@@ -34,15 +34,15 @@ func Test_Queue_Enqueue(t *testing.T) {
 	}
 }
 
-func Test_Queue_Pop(t *testing.T) {
+func Test_Queue_Dequeue(t *testing.T) {
 	cases := []struct {
 		q                        *Queue
 		timesToDequeue           int
 		expectedLastValueDequeue int
 		expected                 string
 	}{
-		{newQueue().enqueue(7).enqueue(10), 1, 10, "7 - EOQ"},
-		{newQueue().enqueue(10).enqueue(25).enqueue(41), 2, 25, "10 - EOQ"},
+		{newQueue().enqueue(7).enqueue(10), 1, 7, "10 - EOQ"},
+		{newQueue().enqueue(10).enqueue(25).enqueue(41), 2, 25, "41 - EOQ"},
 		{newQueue().enqueue(4), 1, 4, "EOQ"},
 	}
 
