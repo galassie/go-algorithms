@@ -62,3 +62,23 @@ func Test_Queue_Dequeue(t *testing.T) {
 		}
 	}
 }
+
+func Test_Queue_ToString(t *testing.T) {
+	cases := []struct {
+		q        *Queue
+		expected string
+	}{
+		{newQueue().enqueue(7).enqueue(10), "7 - 10 - EOQ"},
+		{newQueue().enqueue(10).enqueue(25).enqueue(41), "10 - 25 - 41 - EOQ"},
+		{newQueue().enqueue(4), "4 - EOQ"},
+		{newQueue(), "EOQ"},
+	}
+
+	for _, c := range cases {
+		actual := c.q.toString()
+
+		if actual != c.expected {
+			t.Errorf("Queue toString was incorrect, got: %s, want: %s.", actual, c.expected)
+		}
+	}
+}
