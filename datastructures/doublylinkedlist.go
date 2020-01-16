@@ -15,6 +15,7 @@ type DoublyLinkedListNode struct {
 // DoublyLinkedList represents an integer-value DoublyLinkedList
 type DoublyLinkedList struct {
 	first *DoublyLinkedListNode
+	last  *DoublyLinkedListNode
 }
 
 func newDoublyLinkedListNode(value int) *DoublyLinkedListNode {
@@ -22,52 +23,52 @@ func newDoublyLinkedListNode(value int) *DoublyLinkedListNode {
 }
 
 func newDoublyLinkedList() *DoublyLinkedList {
-	return &DoublyLinkedList{nil}
+	return &DoublyLinkedList{nil, nil}
 }
 
-func (node *DoublyLinkedListNode) addHead(newNode *DoublyLinkedListNode) *DoublyLinkedListNode {
-	if newNode == nil {
-		return node
-	}
+func (doublyLinkedList *DoublyLinkedList) addHead(value int) *DoublyLinkedList {
+	node := newDoublyLinkedListNode(value)
 
-	newNode.next = node
-	node.previous = newNode
-	return newNode
-}
-
-func (node *DoublyLinkedListNode) removeHead() *DoublyLinkedListNode {
-	if node.previous != nil {
-		return node.previous.removeHead()
-	}
-	if node.next == nil {
-		return nil
-	}
-
-	result := node.next
-	node.next = nil
-	result.previous = nil
-	return result
-}
-
-func (node *DoublyLinkedListNode) addTail(newNode *DoublyLinkedListNode) *DoublyLinkedListNode {
-	if newNode == nil {
-		return node
-	}
-
-	if node.next == nil {
-		node.next = newNode
-		newNode.previous = node
+	if doublyLinkedList.first != nil {
+		node.next = doublyLinkedList.first
+		doublyLinkedList.first.previous = node
 	} else {
-		node.next.addTail(newNode)
+		doublyLinkedList.last = node
 	}
 
-	return node
+	doublyLinkedList.first = node
+	return doublyLinkedList
 }
 
-func (node *DoublyLinkedListNode) toString() string {
+func (doublyLinkedList *DoublyLinkedList) removeHead() *DoublyLinkedList {
+	if doublyLinkedList.first != nil {
+		newFirst := doublyLinkedList.first.next
+		doublyLinkedList.first.next = nil
+		newFirst.previous = nil
+		doublyLinkedList.first = newFirst
+	}
+
+	return doublyLinkedList
+}
+
+func (doublyLinkedList *DoublyLinkedList) addTail(value int) *DoublyLinkedList {
+	node := newDoublyLinkedListNode(value)
+
+	if doublyLinkedList.last != nil {
+		node.previous = doublyLinkedList.last
+		doublyLinkedList.last.next = node
+	} else {
+		doublyLinkedList.first = node
+	}
+
+	doublyLinkedList.last = node
+	return doublyLinkedList
+}
+
+func (doublyLinkedList *DoublyLinkedList) toString() string {
 	var sb strings.Builder
 
-	currentNode := node
+	currentNode := doublyLinkedList.first
 	for {
 		if currentNode == nil {
 			break
