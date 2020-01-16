@@ -2,7 +2,7 @@ package datastructures
 
 import "testing"
 
-func Test_DoublyLinkedList_New(t *testing.T) {
+func Test_DoublyLinkedListNode_New(t *testing.T) {
 	actual := newDoublyLinkedListNode(14)
 
 	expectedValue := 14
@@ -19,6 +19,15 @@ func Test_DoublyLinkedList_New(t *testing.T) {
 		t.Errorf("NewDoublyLinkedListNode was incorrect, for next got: %v, want nil.", actual.next)
 	}
 }
+
+func Test_DoublyLinkedList_New(t *testing.T) {
+	actual := newDoublyLinkedList()
+
+	if actual == nil {
+		t.Errorf("NewDoublyLinkedList was incorrect, got nil.")
+	}
+}
+
 func Test_DoublyLinkedList_AddHeadWithNil(t *testing.T) {
 	dll := newDoublyLinkedListNode(3)
 

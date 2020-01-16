@@ -12,8 +12,17 @@ type DoublyLinkedListNode struct {
 	next     *DoublyLinkedListNode
 }
 
+// DoublyLinkedList represents an integer-value DoublyLinkedList
+type DoublyLinkedList struct {
+	first *DoublyLinkedListNode
+}
+
 func newDoublyLinkedListNode(value int) *DoublyLinkedListNode {
 	return &DoublyLinkedListNode{value, nil, nil}
+}
+
+func newDoublyLinkedList() *DoublyLinkedList {
+	return &DoublyLinkedList{nil}
 }
 
 func (node *DoublyLinkedListNode) addHead(newNode *DoublyLinkedListNode) *DoublyLinkedListNode {
