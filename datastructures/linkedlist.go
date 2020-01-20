@@ -1,6 +1,7 @@
 package datastructures
 
 import (
+	"errors"
 	"strconv"
 	"strings"
 )
@@ -22,6 +23,22 @@ func newLinkedListNode(value int) *LinkedListNode {
 
 func newLinkedList() *LinkedList {
 	return &LinkedList{nil}
+}
+
+func (linkedList *LinkedList) elementAt(index int) (int, error) {
+	elementToEvaluate := linkedList.first
+	if elementToEvaluate == nil {
+		return -1, errors.New("LinkedList is empty")
+	}
+
+	for i := 0; i < index; i++ {
+		elementToEvaluate = elementToEvaluate.next
+		if elementToEvaluate == nil {
+			return -1, errors.New("Index is out of range")
+		}
+	}
+
+	return elementToEvaluate.value, nil
 }
 
 func (linkedList *LinkedList) addHead(value int) *LinkedList {

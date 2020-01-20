@@ -1,6 +1,9 @@
 package datastructures
 
-import "testing"
+import (
+	"errors"
+	"testing"
+)
 
 func Test_LinkedListNode_New(t *testing.T) {
 	actual := newLinkedListNode(3)
@@ -22,6 +25,37 @@ func Test_LinkedList_New(t *testing.T) {
 
 	if actual == nil {
 		t.Errorf("NewLinkedList was incorrect, got nil.")
+	}
+}
+
+func Test_LinkedList_ElementAt(t *testing.T) {
+	cases := []struct {
+		ll            *LinkedList
+		index         int
+		expectedValue int
+		expectedError error
+	}{
+		{newLinkedList().addTail(10).addTail(25), 0, 10, nil},
+		{newLinkedList().addTail(3).addTail(4).addTail(33), 2, 33, nil},
+		{newLinkedList().addTail(3).addTail(4).addTail(33).addTail(92), 1, 4, nil},
+		{newLinkedList(), 0, -1, errors.New("LinkedList is empty")},
+		{newLinkedList().addTail(10).addTail(25), 3, -1, errors.New("Index is out of range")},
+	}
+
+	for _, c := range cases {
+		actualValue, actualError := c.ll.elementAt(c.index)
+
+		if actualValue != c.expectedValue {
+			t.Errorf("LinkedList removeHead was incorrect for value, got: %d, want: %d.", actualValue, c.expectedValue)
+		}
+
+		if actualError == nil && c.expectedError != nil {
+			t.Errorf("LinkedList removeHead was incorrect for error, expected an error but actual error is nil")
+		} else if actualError != nil && c.expectedError == nil {
+			t.Errorf("LinkedList removeHead was incorrect for error, got an error but wasn't expected")
+		} else if actualError != nil && c.expectedError != nil && actualError.Error() != c.expectedError.Error() {
+			t.Errorf("LinkedList removeHead was incorrect for error, got: \"%s\", want: \"%s\".", actualError, c.expectedError)
+		}
 	}
 }
 
