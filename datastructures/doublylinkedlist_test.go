@@ -96,6 +96,26 @@ func Test_DoublyLinkedList_AddTail(t *testing.T) {
 	}
 }
 
+func Test_DoublyLinkedList_RemoveTail(t *testing.T) {
+	cases := []struct {
+		dll      *DoublyLinkedList
+		expected string
+	}{
+		{newDoublyLinkedList().addHead(7).addHead(5), "nil<~5 -- EODLL"},
+		{newDoublyLinkedList().addHead(10).addHead(23).addHead(4), "nil<~4 -- 4<~23 -- EODLL"},
+		{newDoublyLinkedList(), "EODLL"},
+		{newDoublyLinkedList().addHead(40), "EODLL"},
+	}
+
+	for _, c := range cases {
+		result := c.dll.removeTail()
+		actual := result.toString()
+
+		if actual != c.expected {
+			t.Errorf("DoublyLinkedList removeTail was incorrect, got: %s, want: %s.", actual, c.expected)
+		}
+	}
+}
 func Test_DoublyLinkedList_ToString(t *testing.T) {
 	cases := []struct {
 		dll      *DoublyLinkedList

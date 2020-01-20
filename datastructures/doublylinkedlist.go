@@ -65,6 +65,25 @@ func (doublyLinkedList *DoublyLinkedList) addTail(value int) *DoublyLinkedList {
 	return doublyLinkedList
 }
 
+func (doublyLinkedList *DoublyLinkedList) removeTail() *DoublyLinkedList {
+	if doublyLinkedList.last != nil {
+		nodeToRemove := doublyLinkedList.last
+		if nodeToRemove.previous != nil {
+			newLastNode := nodeToRemove.previous
+
+			nodeToRemove.previous = nil
+			newLastNode.next = nil
+
+			doublyLinkedList.last = newLastNode
+		} else {
+			doublyLinkedList.first = nil
+			doublyLinkedList.last = nil
+		}
+	}
+
+	return doublyLinkedList
+}
+
 func (doublyLinkedList *DoublyLinkedList) toString() string {
 	var sb strings.Builder
 
