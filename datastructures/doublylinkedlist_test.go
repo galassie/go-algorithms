@@ -1,6 +1,9 @@
 package datastructures
 
-import "testing"
+import (
+	"errors"
+	"testing"
+)
 
 func Test_DoublyLinkedListNode_New(t *testing.T) {
 	actual := newDoublyLinkedListNode(14)
@@ -25,6 +28,37 @@ func Test_DoublyLinkedList_New(t *testing.T) {
 
 	if actual == nil {
 		t.Errorf("NewDoublyLinkedList was incorrect, got nil.")
+	}
+}
+
+func Test_DoublyLinkedList_ElementAt(t *testing.T) {
+	cases := []struct {
+		dll           *DoublyLinkedList
+		index         int
+		expectedValue int
+		expectedError error
+	}{
+		{newDoublyLinkedList().addTail(10).addTail(25), 0, 10, nil},
+		{newDoublyLinkedList().addTail(3).addTail(4).addTail(33), 2, 33, nil},
+		{newDoublyLinkedList().addTail(3).addTail(4).addTail(33).addTail(92), 1, 4, nil},
+		{newDoublyLinkedList(), 0, -1, errors.New("DoublyLinkedList is empty")},
+		{newDoublyLinkedList().addTail(10).addTail(25), 3, -1, errors.New("Index is out of range")},
+	}
+
+	for _, c := range cases {
+		actualValue, actualError := c.dll.elementAt(c.index)
+
+		if actualValue != c.expectedValue {
+			t.Errorf("DoublyLinkedList elementAt was incorrect for value, got: %d, want: %d.", actualValue, c.expectedValue)
+		}
+
+		if actualError == nil && c.expectedError != nil {
+			t.Errorf("DoublyLinkedList elementAt was incorrect for error, expected an error but actual error is nil")
+		} else if actualError != nil && c.expectedError == nil {
+			t.Errorf("DoublyLinkedList elementAt was incorrect for error, got an error but wasn't expected")
+		} else if actualError != nil && c.expectedError != nil && actualError.Error() != c.expectedError.Error() {
+			t.Errorf("DoublyLinkedList elementAt was incorrect for error, got: \"%s\", want: \"%s\".", actualError, c.expectedError)
+		}
 	}
 }
 
