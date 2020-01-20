@@ -46,15 +46,15 @@ func Test_LinkedList_ElementAt(t *testing.T) {
 		actualValue, actualError := c.ll.elementAt(c.index)
 
 		if actualValue != c.expectedValue {
-			t.Errorf("LinkedList removeHead was incorrect for value, got: %d, want: %d.", actualValue, c.expectedValue)
+			t.Errorf("LinkedList elementAt was incorrect for value, got: %d, want: %d.", actualValue, c.expectedValue)
 		}
 
 		if actualError == nil && c.expectedError != nil {
-			t.Errorf("LinkedList removeHead was incorrect for error, expected an error but actual error is nil")
+			t.Errorf("LinkedList elementAt was incorrect for error, expected an error but actual error is nil")
 		} else if actualError != nil && c.expectedError == nil {
-			t.Errorf("LinkedList removeHead was incorrect for error, got an error but wasn't expected")
+			t.Errorf("LinkedList elementAt was incorrect for error, got an error but wasn't expected")
 		} else if actualError != nil && c.expectedError != nil && actualError.Error() != c.expectedError.Error() {
-			t.Errorf("LinkedList removeHead was incorrect for error, got: \"%s\", want: \"%s\".", actualError, c.expectedError)
+			t.Errorf("LinkedList elementAt was incorrect for error, got: \"%s\", want: \"%s\".", actualError, c.expectedError)
 		}
 	}
 }
