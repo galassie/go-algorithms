@@ -63,6 +63,25 @@ func Test_Queue_Dequeue(t *testing.T) {
 	}
 }
 
+func Test_Queue_Peek(t *testing.T) {
+	cases := []struct {
+		q        *Queue
+		expected int
+	}{
+		{newQueue().enqueue(7).enqueue(10), 7},
+		{newQueue().enqueue(10).enqueue(25).enqueue(41), 10},
+		{newQueue().enqueue(4), 4},
+	}
+
+	for _, c := range cases {
+		actual := c.q.peek()
+
+		if actual != c.expected {
+			t.Errorf("Queue peek was incorrect, got: %d, want: %d.", actual, c.expected)
+		}
+	}
+}
+
 func Test_Queue_ToString(t *testing.T) {
 	cases := []struct {
 		q        *Queue

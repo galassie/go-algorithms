@@ -25,6 +25,10 @@ func (queue *Queue) dequeue() int {
 	return result
 }
 
+func (queue *Queue) peek() int {
+	return queue.ll.first.value
+}
+
 func (queue *Queue) toString() string {
 	var sb strings.Builder
 
