@@ -7,11 +7,36 @@ type BinaryTreeNode struct {
 	right *BinaryTreeNode
 }
 
-// BinaryTree represents an integer-value BinaryTree
-type BinaryTree struct {
-	root *BinaryTreeNode
-}
-
 func newBinaryTreeNode(value int) *BinaryTreeNode {
 	return &BinaryTreeNode{value, nil, nil}
+}
+
+func (binaryTreeNode *BinaryTreeNode) getValue() int {
+	return binaryTreeNode.value
+}
+
+func (binaryTreeNode *BinaryTreeNode) hasLeft() bool {
+	return binaryTreeNode.left != nil
+}
+
+func (binaryTreeNode *BinaryTreeNode) hasRight() bool {
+	return binaryTreeNode.right != nil
+}
+
+func (binaryTreeNode *BinaryTreeNode) getLeft() *BinaryTreeNode {
+	return binaryTreeNode.left
+}
+
+func (binaryTreeNode *BinaryTreeNode) getRight() *BinaryTreeNode {
+	return binaryTreeNode.right
+}
+
+func (binaryTreeNode *BinaryTreeNode) setLeft(value int) *BinaryTreeNode {
+	binaryTreeNode.left = newBinaryTreeNode(value)
+	return binaryTreeNode
+}
+
+func (binaryTreeNode *BinaryTreeNode) setRight(value int) *BinaryTreeNode {
+	binaryTreeNode.left = newBinaryTreeNode(value)
+	return binaryTreeNode
 }
