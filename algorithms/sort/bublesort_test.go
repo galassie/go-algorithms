@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func Test_SelectionSort(t *testing.T) {
+func Test_BubleSort(t *testing.T) {
 	cases := []struct {
 		input          []int
 		expectedOutput []int
@@ -16,10 +16,10 @@ func Test_SelectionSort(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		actual := SelectionSort(c.input)
+		actual := BubleSort(c.input)
 
 		if !Equal(actual, c.expectedOutput) {
-			t.Errorf("SelectionSort was incorrect, got: %v, want: %v.", actual, c.expectedOutput)
+			t.Errorf("BubleSort was incorrect, got: %v, want: %v.", actual, c.expectedOutput)
 		}
 	}
 }
