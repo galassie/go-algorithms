@@ -1,4 +1,4 @@
-package algorithms
+package sort
 
 // SelectionSort is the implementation of the Selection Sort algorithm
 func SelectionSort(collection []int) []int {
